@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "SubscriptionsWatchlist",
+  "type": "object",
+  "additionalProperties": { "$ref": "#/definitions/SubscriptionWatchlist" },
+  "definitions": {
+    "SubscriptionWatchlist": {
+      "title": "SubscriptionWatchlist",
+      "type": "object",
+      "properties": {
+        "Conversion": {
+          "type": "string"
+        },
+        "ConversionSymbol": {
+          "type": "string"
+        },
+        "CurrencyFrom": {
+          "type": "string"
+        },
+        "CurrencyTo": {
+          "type": "string"
+        },
+        "Market": {
+          "type": "string"
+        },
+        "Supply": {
+          "type": "number"
+        },
+        "TotalVolume24H": {
+          "type": "number"
+        },
+        "SubBase": {
+          "type": "string"
+        },
+        "SubsNeeded": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "RAW": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

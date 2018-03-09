@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "DayAverage",
+  "type": "object",
+  "properties": {
+    "ConversionType": {
+      "$ref": "HistoricalData.schema.json#/definitions/ConversionType"
+    },
+    "additionalProperties": { "type": "number" }
+  }
+}

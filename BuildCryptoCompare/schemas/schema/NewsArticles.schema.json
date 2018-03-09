@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "NewsArticles",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/Article"
+  },
+  "definitions": {
+    "SourceInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "img": {
+          "type": "string"
+        }
+      }
+    },
+    "Article": {
+      "title": "Article",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "guid": {
+          "type": "string"
+        },
+        "published_on": {
+          "type": "integer"
+        },
+        "imageurl": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "source_info": {
+          "$ref": "#/definitions/SourceInfo"
+        }
+      }
+    }
+  }
+}

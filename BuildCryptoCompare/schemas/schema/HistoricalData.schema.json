@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "HistoricalData",
+  "type": "object",
+  "properties": {
+    "Response": {
+      "type": "string"
+    },
+    "Type": {
+      "type": "integer"
+    },
+    "Aggregated": {
+      "type": "boolean"
+    },
+    "Data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Data"
+      }
+    },
+    "TimeTo": {
+      "type": "integer"
+    },
+    "TimeFrom": {
+      "type": "integer"
+    },
+    "FirstValueInArray": {
+      "type": "boolean"
+    },
+    "ConversionType": {
+      "$ref": "#/definitions/ConversionType"
+    }
+  },
+  "definitions": {
+
+    "Data": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "integer"
+        },
+        "close": {
+          "type": "number"
+        },
+        "high": {
+          "type": "number"
+        },
+        "low": {
+          "type": "number"
+        },
+        "open": {
+          "type": "number"
+        },
+        "volumefrom": {
+          "type": "number"
+        },
+        "volumeto": {
+          "type": "number"
+        }
+      }
+    },
+    "ConversionType": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "conversionSymbol": {
+          "type": "string"
+        }
+      }
+    }
+
+  }
+}

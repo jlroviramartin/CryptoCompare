@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "PriceMulti",
+  "type": "object",
+  "additionalProperties": { "$ref": "#/definitions/PriceList" },
+  "definitions": {
+    "PriceList": {
+      "title": "PriceList",
+      "type": "object",
+      "additionalProperties": { "type": "number" }
+    }
+  }
+}

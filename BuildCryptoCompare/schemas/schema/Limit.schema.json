@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Limit",
+  "type": "object",
+  "properties": {
+    "Message": {
+      "type": "string"
+    },
+    "Hour": {
+      "$ref": "#/definitions/CallData"
+    },
+    "Minute": {
+      "$ref": "#/definitions/CallData"
+    },
+    "Second": {
+      "$ref": "#/definitions/CallData"
+    }
+  },
+  "definitions": {
+
+    "CallData": {
+      "type": "object",
+      "properties": {
+        "CallsMade": {
+          "$ref": "#/definitions/Call"
+        },
+        "CallsLeft": {
+          "$ref": "#/definitions/Call"
+        }
+      }
+    },
+    "Call": {
+      "type": "object",
+      "properties": {
+        "Histo": {
+          "type": "integer"
+        },
+        "Price": {
+          "type": "integer"
+        },
+        "News": {
+          "type": "integer"
+        },
+        "Strict": {
+          "type": "integer"
+        }
+      }
+    }
+
+  }
+}

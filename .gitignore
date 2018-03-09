@@ -1,0 +1,14 @@
+.vs/
+packages/
+BuildCryptoCompare/bin/
+BuildCryptoCompare/obj/
+CryptoCompare/bin/
+CryptoCompare/obj/
+CryptoCompareApp/CryptoCompareApp/bin/
+CryptoCompareApp/CryptoCompareApp/obj/
+CryptoCompareApp/CryptoCompareApp.Android/bin/
+CryptoCompareApp/CryptoCompareApp.Android/obj/
+CryptoCompareApp/CryptoCompareApp.iOS/bin/
+CryptoCompareApp/CryptoCompareApp.iOS/obj/
+CryptoCompareApp/CryptoCompareApp.UWP/bin/
+CryptoCompareApp/CryptoCompareApp.UWP/obj/

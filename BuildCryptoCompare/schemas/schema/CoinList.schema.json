@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CoinList",
+  "type": "object",
+  "properties": {
+    "Response": {
+      "type": "string"
+    },
+    "Message": {
+      "type": "string"
+    },
+    "BaseImageUrl": {
+      "type": "string"
+    },
+    "BaseLinkUrl": {
+      "type": "string"
+    },
+    "DefaultWatchlist": {
+      "$ref": "#/definitions/DefaultWatch"
+    },
+    "Data": {
+      "$ref": "#/definitions/CoinDataList"
+    },
+    "Type": {
+      "type": "integer"
+    }
+  },
+  "definitions": {
+
+    "DefaultWatch": {
+      "type": "object",
+      "properties": {
+        "CoinIs": {
+          "type": "string"
+        },
+        "Sponsored": {
+          "type": "string"
+        }
+      }
+    },
+    "CoinDataList": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/CoinData" }
+    },
+    "CoinData": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Url": {
+          "type": "string"
+        },
+        "ImageUrl": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Symbol": {
+          "type": "string"
+        },
+        "CoinName": {
+          "type": "string"
+        },
+        "FullName": {
+          "type": "string"
+        },
+        "Algorithm": {
+          "type": "string"
+        },
+        "ProofType": {
+          "type": "string"
+        },
+        "FullyPremined": {
+          "type": "string"
+        },
+        "TotalCoinSupply": {
+          "type": "string"
+        },
+        "PreMinedValue": {
+          "type": "string"
+        },
+        "TotalCoinsFreeFloat": {
+          "type": "string"
+        },
+        "SortOrder": {
+          "type": "string"
+        },
+        "Sponsored": {
+          "type": "boolean"
+        },
+        "IsTrading": {
+          "type": "boolean"
+        }
+      }
+     }
+
+  }
+}

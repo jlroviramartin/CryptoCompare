@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "NewsProviders",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/Provider"
+  },
+  "definitions": {
+    "Provider": {
+      "title": "Provider",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "img": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

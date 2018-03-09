@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "GenerateAverage",
+  "type": "object",
+  "properties": {
+    "RAW": {
+      "$ref": "#/definitions/AverageData"
+    },
+    "DISPLAY": {
+      "$ref": "#/definitions/AverageDisplayData"
+    }
+  },
+  "definitions": {
+
+    "AverageData": {
+      "type": "object",
+      "properties": {
+        "MARKET": {
+          "type": "string"
+        },
+        "FROMSYMBOL": {
+          "type": "string"
+        },
+        "TOSYMBOL": {
+          "type": "string"
+        },
+        "FLAGS": {
+          "type": "integer"
+        },
+        "PRICE": {
+          "type": "number"
+        },
+        "LASTUPDATE": {
+          "type": "integer"
+        },
+        "LASTVOLUME": {
+          "type": "number"
+        },
+        "LASTVOLUMETO": {
+          "type": "number"
+        },
+        "LASTTRADEID": {
+          "type": "string"
+        },
+        "VOLUME24HOUR": {
+          "type": "number"
+        },
+        "VOLUME24HOURTO": {
+          "type": "number"
+        },
+        "OPEN24HOUR": {
+          "type": "number"
+        },
+        "HIGH24HOUR": {
+          "type": "number"
+        },
+        "LOW24HOUR": {
+          "type": "number"
+        },
+        "LASTMARKET": {
+          "type": "string"
+        },
+        "CHANGE24HOUR": {
+          "type": "number"
+        },
+        "CHANGEPCT24HOUR": {
+          "type": "number"
+        },
+        "CHANGEDAY": {
+          "type": "integer"
+        },
+        "CHANGEPCTDAY": {
+          "type": "integer"
+        }
+      }
+    },
+
+    "AverageDisplayData": {
+      "type": "object",
+      "properties": {
+        "FROMSYMBOL": {
+          "type": "string"
+        },
+        "TOSYMBOL": {
+          "type": "string"
+        },
+        "MARKET": {
+          "type": "string"
+        },
+        "PRICE": {
+          "type": "string"
+        },
+        "LASTUPDATE": {
+          "type": "string"
+        },
+        "LASTVOLUME": {
+          "type": "string"
+        },
+        "LASTVOLUMETO": {
+          "type": "string"
+        },
+        "LASTTRADEID": {
+          "type": "string"
+        },
+        "VOLUME24HOUR": {
+          "type": "string"
+        },
+        "VOLUME24HOURTO": {
+          "type": "string"
+        },
+        "OPEN24HOUR": {
+          "type": "string"
+        },
+        "HIGH24HOUR": {
+          "type": "string"
+        },
+        "LOW24HOUR": {
+          "type": "string"
+        },
+        "LASTMARKET": {
+          "type": "string"
+        },
+        "CHANGE24HOUR": {
+          "type": "string"
+        },
+        "CHANGEPCT24HOUR": {
+          "type": "string"
+        },
+        "CHANGEDAY": {
+          "type": "string"
+        },
+        "CHANGEPCTDAY": {
+          "type": "string"
+        }
+      }
+    }
+
+  }
+}

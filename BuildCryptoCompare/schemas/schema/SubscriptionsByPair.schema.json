@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "SubscriptionsByPair",
+  "type": "object",
+  "additionalProperties": { "$ref": "#/definitions/SubscriptionByPair" },
+  "definitions": {
+    "SubscriptionByPair": {
+      "title": "SubscriptionByPair",
+      "type": "object",
+      "properties": {
+        "TRADES": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CURRENT": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CURRENTAGG": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

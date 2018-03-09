@@ -1,0 +1,961 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "No description",
+    "version" : "1.0.0",
+    "title" : "cryptocompare",
+    "contact" : { }
+  },
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/data/price" : {
+      "get" : {
+        "summary" : "Single Symbol Price",
+        "description" : "Get the current price of any cryptocurrency in any other currency that you need.\n\nIf the crypto does not trade directly into the toSymbol requested, BTC will be used for conversion. If the oposite pair trades we invert it (eg.: BTC-XMR)",
+        "parameters" : [ {
+          "name" : "tryConversion",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to false, it will try to get only direct trading values"
+        }, {
+          "name" : "fsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The cryptocurrency symbol of interest",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "tsyms",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "Comma separated cryptocurrency symbols list to convert into",
+          "maxLength" : 500,
+          "x-example" : "JPY,EUR"
+        }, {
+          "name" : "e",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The exchange to obtain data from (our aggregated average - CCCAGG - by default)",
+          "default" : "CCCAGG",
+          "maxLength" : 30,
+          "x-example" : "CCCAGG"
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/Price"
+            }
+          }
+        }
+      }
+    },
+    "/data/pricemulti" : {
+      "get" : {
+        "summary" : "Multiple Symbols Price",
+        "description" : "Same as single API path but with multiple from symbols.",
+        "parameters" : [ {
+          "name" : "tryConversion",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to false, it will try to get only direct trading values"
+        }, {
+          "name" : "fsyms",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "Comma separated cryptocurrency symbols list",
+          "maxLength" : 300,
+          "x-example" : "ETH,DASH"
+        }, {
+          "name" : "tsyms",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "Comma separated cryptocurrency symbols list to convert into",
+          "maxLength" : 100,
+          "x-example" : "BTC,USD,EUR"
+        }, {
+          "name" : "e",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The exchange to obtain data from (our aggregated average - CCCAGG - by default)",
+          "default" : "CCCAGG",
+          "maxLength" : 30,
+          "x-example" : "CCCAGG"
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/PriceMulti"
+            }
+          }
+        }
+      }
+    },
+    "/data/pricemultifull" : {
+      "get" : {
+        "summary" : "Multiple Symbols Full Price",
+        "description" : "Get all the current trading info (price, vol, open, high, low etc) of any list of cryptocurrencies in any other currency that you need. If the crypto does not trade directly into the toSymbol requested, BTC will be used for conversion.\n\nThis API also returns Display values for all the fields. If the oposite pair trades we invert it (eg.: BTC-XMR)",
+        "parameters" : [ {
+          "name" : "tryConversion",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to false, it will try to get only direct trading values"
+        }, {
+          "name" : "fsyms",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "Comma separated cryptocurrency symbols list",
+          "maxLength" : 300,
+          "x-example" : "ETH,DASH"
+        }, {
+          "name" : "tsyms",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "Comma separated cryptocurrency symbols list to convert into",
+          "maxLength" : 100,
+          "x-example" : "BTC,USD,EUR"
+        }, {
+          "name" : "e",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The exchange to obtain data from (our aggregated average - CCCAGG - by default)",
+          "default" : "CCCAGG",
+          "maxLength" : 30,
+          "x-example" : "CCCAGG"
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/PriceMultiFull"
+            }
+          }
+        }
+      }
+    },
+    "/data/generateAvg" : {
+      "get" : {
+        "summary" : "Generate Custom Average",
+        "description" : "Compute the current trading info (price, vol, open, high, low etc) of the requested pair as a volume weighted average based on the exchanges requested.",
+        "parameters" : [ {
+          "name" : "fsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The cryptocurrency symbol of interest",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "tsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The currency symbol to convert into",
+          "maxLength" : 10,
+          "x-example" : "USD"
+        }, {
+          "name" : "e",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The exchange to obtain data from (our aggregated average - CCCAGG - by default)",
+          "maxLength" : 150,
+          "x-example" : "Coinbase,Bitfinex"
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/GenerateAverage"
+            }
+          }
+        }
+      }
+    },
+    "/data/histoday" : {
+      "get" : {
+        "summary" : "Historical Daily OHLCV",
+        "description" : "Get open, high, low, close, volumefrom and volumeto (OHLCV) from the daily historical data.The values are based on 00:00 GMT time.It uses BTC conversion if data is not available because the coin is not trading in the specified currency.",
+        "parameters" : [ {
+          "name" : "tryConversion",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to false, it will try to get only direct trading values"
+        }, {
+          "name" : "fsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The cryptocurrency symbol of interest",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "tsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The currency symbol to convert into",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "e",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The exchange to obtain data from (our aggregated average - CCCAGG - by default)",
+          "default" : "CCCAGG",
+          "maxLength" : 10,
+          "x-example" : "CCCAGG"
+        }, {
+          "name" : "aggregate",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Time period to aggregate the data over (for daily it's days, for hourly it's hours and for minute histo it's minutes)",
+          "minimum" : 1,
+          "maximum" : 3,
+          "x-example" : 1
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "The number of data points to return",
+          "x-example" : 30
+        }, {
+          "name" : "allData",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "Returns all data (only available on histo day)",
+          "default" : false
+        }, {
+          "name" : "toTs",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Last unix timestamp to return data for",
+          "x-example" : 1452680400
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/HistoricalData"
+            }
+          }
+        }
+      }
+    },
+    "/data/histohour" : {
+      "get" : {
+        "summary" : "Historical Hourly OHLCV",
+        "description" : "Get open, high, low, close, volumefrom and volumeto from the hourly historical data. The values are based on 00:00 GMT time.It uses BTC conversion if data is not available because the coin is not trading in the specified currency.",
+        "parameters" : [ {
+          "name" : "tryConversion",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to false, it will try to get only direct trading values"
+        }, {
+          "name" : "fsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The cryptocurrency symbol of interest",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "tsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The currency symbol to convert into",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "e",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The exchange to obtain data from (our aggregated average - CCCAGG - by default)",
+          "default" : "CCCAGG",
+          "maxLength" : 10,
+          "x-example" : "CCCAGG"
+        }, {
+          "name" : "aggregate",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Time period to aggregate the data over (for daily it's days, for hourly it's hours and for minute histo it's minutes)",
+          "minimum" : 1,
+          "maximum" : 3,
+          "x-example" : 1
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "The number of data points to return",
+          "x-example" : 30
+        }, {
+          "name" : "toTs",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Last unix timestamp to return data for",
+          "x-example" : 1452680400
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/HistoricalData"
+            }
+          }
+        }
+      }
+    },
+    "/data/histominute" : {
+      "get" : {
+        "summary" : "Historical Minute OHLCV",
+        "description" : "Get open, high, low, close, volumefrom and volumeto from the each minute historical data. This data is only stored for 7 days, if you need more, use the hourly or daily path.\n\nIt uses BTC conversion if data is not available because the coin is not trading in the specified currency.",
+        "parameters" : [ {
+          "name" : "tryConversion",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to false, it will try to get only direct trading values"
+        }, {
+          "name" : "fsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The cryptocurrency symbol of interest",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "tsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The currency symbol to convert into",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "e",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The exchange to obtain data from (our aggregated average - CCCAGG - by default)",
+          "default" : "CCCAGG",
+          "maxLength" : 10,
+          "x-example" : "CCCAGG"
+        }, {
+          "name" : "aggregate",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Time period to aggregate the data over (for daily it's days, for hourly it's hours and for minute histo it's minutes)",
+          "minimum" : 1,
+          "maximum" : 3,
+          "x-example" : 1
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "The number of data points to return",
+          "x-example" : 30
+        }, {
+          "name" : "toTs",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Last unix timestamp to return data for",
+          "x-example" : 1452680400
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/HistoricalData"
+            }
+          }
+        }
+      }
+    },
+    "/data/pricehistorical" : {
+      "get" : {
+        "summary" : "Historical Day OHLCV for a timestamp",
+        "description" : "Get the price of any cryptocurrency in any other currency that you need at a given timestamp. The price comes from the daily info - so it would be the price at the end of the day GMT based on the requested TS.\n\nIf the crypto does not trade directly into the toSymbol requested, BTC will be used for conversion. Tries to get direct trading pair data, if there is none or it is more than 10 days before the ts requested, it uses BTC conversion. If the oposite pair trades we invert it (eg.: BTC-XMR)\n\nThe calculation types are:\n\n    Close - a Close of the day close price\n    MidHighLow - the average between the 24 H high and low\n    VolFVolT - the total volume to / the total volume from",
+        "parameters" : [ {
+          "name" : "tryConversion",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to false, it will try to get only direct trading values"
+        }, {
+          "name" : "fsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The cryptocurrency symbol of interest",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "tsyms",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "Comma separated cryptocurrency symbols list to convert into",
+          "maxLength" : 30,
+          "x-example" : "BTC,USD,EUR"
+        }, {
+          "name" : "e",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The exchange to obtain data from (our aggregated average - CCCAGG - by default)",
+          "default" : "CCCAGG",
+          "maxLength" : 10,
+          "x-example" : "CCCAGG"
+        }, {
+          "name" : "ts",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "The unix timestamp of interest",
+          "x-example" : 1452680400
+        }, {
+          "name" : "calculationType",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Type of average to calculate (Close - a Close of the day close price, MidHighLow - the average between the 24 H high and low, VolFVolT - the total volume to / the total volume from)",
+          "enum" : [ "Close", "MidHighLow", "VolFVolT" ],
+          "maxLength" : 30
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/PriceHistorical"
+            }
+          }
+        }
+      }
+    },
+    "/data/dayAvg" : {
+      "get" : {
+        "summary" : "Historical Day Average Price",
+        "description" : "Get day average price. The values are based on hourly vwap data and the average can be calculated in different ways. It uses BTC conversion if data is not available because the coin is not trading in the specified currency. If tryConversion is set to false it will give you the direct data. If no toTS is given it will automatically do the current day. Also for different timezones use the UTCHourDiff param\n\nThe calculation types are:\n\n    VWAP - a VWAP of the hourly close price\n    MidHighLow - the average between the 24 H high and low.\n    VolFVolT - the total volume from / the total volume to (only avilable with tryConversion set to false so only for direct trades but the value should be the most accurate average day price)",
+        "parameters" : [ {
+          "name" : "tryConversion",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to false, it will try to get only direct trading values"
+        }, {
+          "name" : "fsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The cryptocurrency symbol of interest",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "tsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The currency symbol to convert into",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "e",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The exchange to obtain data from (our aggregated average - CCCAGG - by default)",
+          "default" : "CCCAGG",
+          "maxLength" : 10,
+          "x-example" : "CCCAGG"
+        }, {
+          "name" : "toTs",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Last unix timestamp to return data for",
+          "x-example" : 1452680400
+        }, {
+          "name" : "avgType",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Type of average to calculate (Close - a Close of the day close price, MidHighLow - the average between the 24 H high and low, VolFVolT - the total volume to / the total volume from)",
+          "enum" : [ "Close", "MidHighLow", "VolFVolT" ],
+          "maxLength" : 30
+        }, {
+          "name" : "UTCHourDiff",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "By deafult it does UTC, if you want a different time zone just pass the hour difference. For PST you would pass -8 for example.",
+          "x-example" : -8
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/DayAverage"
+            }
+          }
+        }
+      }
+    },
+    "/data/subs" : {
+      "get" : {
+        "summary" : "Subs by Pair",
+        "description" : "Get all the available streamer subscription channels for the requested pairs.\n",
+        "parameters" : [ {
+          "name" : "fsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The cryptocurrency symbol of interest",
+          "maxLength" : 10,
+          "x-example" : "BTC"
+        }, {
+          "name" : "tsyms",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Comma separated cryptocurrency symbols list to convert into",
+          "maxLength" : 100,
+          "x-example" : "USD,EUR,GBP"
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/SubscriptionsByPair"
+            }
+          }
+        }
+      }
+    },
+    "/data/subsWatchlist" : {
+      "get" : {
+        "summary" : "Subs Watchlist",
+        "description" : "Get combinations of subs and pricing info in order to know what needs to be streamed and how to connect to the streamers. The possible responses for Conversion are: not_needed, direct, invert, multiply, divide, invert_multiply, invert_divide\n\nFor not_needed - it means you asked for one symbol to the same symbol. You should just use the value you have, no need for streaming or conversion.\nFor direct - SubBase + Market + ~ + CurrencyFrom + ~ + CurrencyTo\nFor invert - 1 / SubBase + Market + ~ + CurrencyTo + ~ + CurrencyFrom\nFor multiply - SubBase + Market + ~ + CurrencyFrom + ~ + ConversionSymbol * SubBase + Market + ~ + ConversionSymbol + ~ + CurrencyTo\nFor divide - SubBase + Market + ~ + CurrencyFrom + ~ + ConversionSymbol / SubBase + Market + ~ + CurrencyTo + ~ + ConversionSymbol\nFor invert_muliply - 1 / (SubBase + Market + ~ + CurrencyFrom + ~ + ConversionSymbol * SubBase + Market + ~ + ConversionSymbol + ~ + CurrencyTo)\nFor invert_divide - SubBase + Market + ~ + ConversionSymbol + ~ + CurrencyTo / SubBase + Market + ~ + ConversionSymbol + ~ + CurrencyFrom\n",
+        "parameters" : [ {
+          "name" : "fsyms",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "Comma separated cryptocurrency symbols list",
+          "maxLength" : 3000,
+          "x-example" : "BTC,ETH,XMR,MLN,DASH"
+        }, {
+          "name" : "tsym",
+          "in" : "query",
+          "required" : true,
+          "type" : "string",
+          "description" : "The currency symbol to convert into",
+          "maxLength" : 10,
+          "x-example" : "XMR"
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : "false"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/SubscriptionsWatchlist"
+            }
+          }
+        }
+      }
+    },
+    "/data/news/providers" : {
+      "get" : {
+        "summary" : "NewsProviders",
+        "description" : "Returns all the news providers that CryptoCompare has integrated with.\n\n",
+        "parameters" : [ {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/NewsProviders"
+            }
+          }
+        }
+      }
+    },
+    "/data/news/" : {
+      "get" : {
+        "summary" : "LatestNewsArticles",
+        "description" : "Returns news articles from the providers that CryptoCompare has integrated with.\n",
+        "parameters" : [ {
+          "name" : "feeds",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Specific news feeds to retrieve news from",
+          "maxLength" : 400,
+          "x-example" : "cryptocompare,cointelegraph,coindesk"
+        }, {
+          "name" : "lTs",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "description" : "Returns news before that timestamp",
+          "x-example" : 1506478327
+        }, {
+          "name" : "lang",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "Preferred language - English (EN) or Portuguese (PT)",
+          "enum" : [ "EN", "PT" ],
+          "x-example" : "EN"
+        }, {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/NewsArticles"
+            }
+          }
+        }
+      }
+    },
+    "/data/all/exchanges" : {
+      "get" : {
+        "summary" : "All the Exchanges and Trading Pairs",
+        "description" : "Returns all the exchanges that CryptoCompare has integrated with.",
+        "parameters" : [ {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/Exchanges"
+            }
+          }
+        }
+      }
+    },
+    "/data/all/coinlist" : {
+      "get" : {
+        "summary" : "All the Coins",
+        "description" : "Returns all the coins that CryptoCompare has added to the website. This is not the full list of coins we have in the system, it is just the list of coins we have done some research on.",
+        "parameters" : [ {
+          "name" : "extraParams",
+          "in" : "query",
+          "required" : false,
+          "type" : "string",
+          "description" : "The name of your application (we recommend you send it)",
+          "maxLength" : 50,
+          "x-example" : "your_app_name"
+        }, {
+          "name" : "sign",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "description" : "If set to true, the server will sign the requests (be default we don't sign them), this is useful for usage in smart contracts",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/CoinList"
+            }
+          }
+        }
+      }
+    },
+    "/stats/rate/limit" : {
+      "get" : {
+        "summary" : "Rate limits for your IP",
+        "description" : "Get the rate limits left for you on the histo, price and news paths in the current hour, minute and second.",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/Limit"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Price" : {
+      "type" : "object"
+    },
+    "PriceMulti" : {
+      "type" : "object"
+    },
+    "PriceMultiFull" : {
+      "type" : "object"
+    },
+    "GenerateAverage" : {
+      "type" : "object"
+    },
+    "HistoricalData" : {
+      "type" : "object"
+    },
+    "PriceHistorical" : {
+      "type" : "object"
+    },
+    "DayAverage" : {
+      "type" : "object"
+    },
+    "SubscriptionsByPair" : {
+      "type" : "object"
+    },
+    "SubscriptionsWatchlist" : {
+      "type" : "object"
+    },
+    "NewsProviders" : {
+      "type" : "object"
+    },
+    "NewsArticles" : {
+      "type" : "object"
+    },
+    "Exchanges" : {
+      "type" : "object"
+    },
+    "CoinList" : {
+      "type" : "object"
+    },
+    "Limit" : {
+      "type" : "object"
+    }
+  }
+}

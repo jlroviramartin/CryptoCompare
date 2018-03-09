@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Exchanges",
+  "type": "object",
+  "additionalProperties": { "$ref": "#/definitions/ExchangeList" },
+  "definitions": {
+
+    "ExchangeList": {
+      "title": "ExchangeList",
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    }
+  }
+}
